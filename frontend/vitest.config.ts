@@ -21,6 +21,7 @@ export default defineConfig({
         'src/test/',
       ],
     },
-    // Remove deprecated options
+    mockReset: true,
+    restoreMocks: true,
   },
 });

@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useAuth } from '../useAuth';
+import * as dynamicCore from '@dynamic-labs/sdk-react-core';
 
 // Mock the Dynamic context
 vi.mock('@dynamic-labs/sdk-react-core', () => ({
@@ -8,19 +9,21 @@ vi.mock('@dynamic-labs/sdk-react-core', () => ({
 }));
 
 describe('useAuth', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('should return authenticated state when user has verified credentials', () => {
-    const { useDynamicContext } = require('@dynamic-labs/sdk-react-core');
-    
-    useDynamicContext.mockReturnValue({
+    vi.mocked(dynamicCore.useDynamicContext).mockReturnValue({
       user: {
         verifiedCredentials: [
           { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0' },
         ],
-      },
+      } as any,
       handleLogOut: vi.fn(),
       setShowAuthFlow: vi.fn(),
-      primaryWallet: {},
-    });
+      primaryWallet: {} as any,
+    } as any);
 
     const { result } = renderHook(() => useAuth());
 
@@ -29,16 +32,14 @@ describe('useAuth', () => {
   });
 
   it('should return not authenticated when user has no verified credentials', () => {
-    const { useDynamicContext } = require('@dynamic-labs/sdk-react-core');
-    
-    useDynamicContext.mockReturnValue({
+    vi.mocked(dynamicCore.useDynamicContext).mockReturnValue({
       user: {
         verifiedCredentials: [],
-      },
+      } as any,
       handleLogOut: vi.fn(),
       setShowAuthFlow: vi.fn(),
       primaryWallet: null,
-    });
+    } as any);
 
     const { result } = renderHook(() => useAuth());
 
@@ -46,14 +47,12 @@ describe('useAuth', () => {
   });
 
   it('should return not authenticated when user is null', () => {
-    const { useDynamicContext } = require('@dynamic-labs/sdk-react-core');
-    
-    useDynamicContext.mockReturnValue({
+    vi.mocked(dynamicCore.useDynamicContext).mockReturnValue({
       user: null,
       handleLogOut: vi.fn(),
       setShowAuthFlow: vi.fn(),
       primaryWallet: null,
-    });
+    } as any);
 
     const { result } = renderHook(() => useAuth());
 
@@ -62,16 +61,15 @@ describe('useAuth', () => {
   });
 
   it('should expose all necessary auth methods', () => {
-    const { useDynamicContext } = require('@dynamic-labs/sdk-react-core');
     const mockHandleLogOut = vi.fn();
     const mockSetShowAuthFlow = vi.fn();
     
-    useDynamicContext.mockReturnValue({
-      user: { verifiedCredentials: [{ address: '0x123' }] },
+    vi.mocked(dynamicCore.useDynamicContext).mockReturnValue({
+      user: { verifiedCredentials: [{ address: '0x123' }] } as any,
       handleLogOut: mockHandleLogOut,
       setShowAuthFlow: mockSetShowAuthFlow,
-      primaryWallet: { address: '0x123' },
-    });
+      primaryWallet: { address: '0x123' } as any,
+    } as any);
 
     const { result } = renderHook(() => useAuth());
 
@@ -80,4 +78,3 @@ describe('useAuth', () => {
     expect(result.current.primaryWallet).toBeDefined();
   });
 });
-

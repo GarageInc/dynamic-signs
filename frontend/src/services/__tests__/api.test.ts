@@ -3,7 +3,8 @@ import axios from 'axios';
 import { verifySignature } from '../api';
 
 vi.mock('axios');
-const mockedAxios = axios as any;
+
+const mockedAxios = vi.mocked(axios, true);
 
 describe('API Service', () => {
   beforeEach(() => {
@@ -42,6 +43,7 @@ describe('API Service', () => {
             message: 'Invalid signature',
           },
         },
+        isAxiosError: true,
       };
 
       mockedAxios.post.mockRejectedValue(mockError);
@@ -53,4 +55,3 @@ describe('API Service', () => {
     });
   });
 });
-
