@@ -11,8 +11,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "@dynamic-labs/ethereum": "^2.0.0",
-    "@dynamic-labs/sdk-react-core": "^2.0.0",
+    "@dynamic-labs/ethereum": "^4.38.0",
+    "@dynamic-labs/sdk-react-core": "^4.38.0",
     "axios": "^1.6.5",
     "ethers": "^6.9.0",
     "react": "^18.2.0",
@@ -41,4 +41,3 @@
     "vitest": "^1.1.0"
   }
 }
-

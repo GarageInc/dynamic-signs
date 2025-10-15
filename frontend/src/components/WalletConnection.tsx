@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 
 const WalletConnection = () => {
-  const { setShowAuthFlow, primaryWallet } = useDynamicContext();
+  const { setShowAuthFlow } = useDynamicContext();
   const [isConnecting, setIsConnecting] = useState(false);
 
   const handleConnect = async () => {

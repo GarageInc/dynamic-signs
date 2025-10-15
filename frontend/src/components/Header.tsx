@@ -1,7 +1,10 @@
 import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
+import { isAuthenticatedWithAWallet } from '@dynamic-labs/sdk-react-core';
 
 const Header = () => {
-  const { user, handleLogOut, isAuthenticated } = useDynamicContext();
+  const { user, handleLogOut } = useDynamicContext();
+
+  const authenticatedWithAWallet = user && isAuthenticatedWithAWallet(user)
 
   return (
     <header className="glass-effect border-b border-slate-700/50 sticky top-0 z-50">
@@ -23,7 +26,7 @@ const Header = () => {
           </div>
 
           {/* User Info and Logout */}
-          {isAuthenticated && user && (
+          {authenticatedWithAWallet && user && (
             <div className="flex items-center space-x-4">
               <div className="hidden sm:flex items-center space-x-2 bg-slate-700/50 px-4 py-2 rounded-lg border border-slate-600">
                 <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
