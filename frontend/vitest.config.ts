@@ -21,6 +21,6 @@ export default defineConfig({
         'src/test/',
       ],
     },
+    // Remove deprecated options
   },
 });
-

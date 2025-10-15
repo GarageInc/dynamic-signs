@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { verifySignature, isValidAddress, normalizeAddress } from './signatureService';
+import {describe, it, expect} from 'vitest'
 
 describe('signatureService', () => {
   describe('verifySignature', () => {
@@ -33,10 +34,10 @@ describe('signatureService', () => {
 
       const result = await verifySignature(differentMessage, signature);
 
-      // The signature will be valid but for a different signer
-      // Since we're verifying a different message, it should fail
-      expect(result.isValid).toBe(false);
-      expect(result.signer).toBe(null);
+      // The signature is valid, but for a different message
+      // ethers.verifyMessage will still recover an address (just not the expected one)
+      expect(result.isValid).toBe(true);
+      expect(result.signer).not.toBe(wallet.address);
     });
 
     it('should handle empty message', async () => {
@@ -64,8 +65,8 @@ describe('signatureService', () => {
 
   describe('isValidAddress', () => {
     it('should return true for valid Ethereum address', () => {
-      const validAddress = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0';
-      expect(isValidAddress(validAddress)).toBe(true);
+      const wallet = ethers.Wallet.createRandom();
+      expect(isValidAddress(wallet.address)).toBe(true);
     });
 
     it('should return false for invalid address', () => {
@@ -82,9 +83,10 @@ describe('signatureService', () => {
 
   describe('normalizeAddress', () => {
     it('should normalize address to checksum format', () => {
-      const address = '0x742d35cc6634c0532925a3b844bc9e7595f0beb0';
-      const normalized = normalizeAddress(address);
-      expect(normalized).toBe('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0');
+      const wallet = ethers.Wallet.createRandom();
+      const lowercase = wallet.address.toLowerCase();
+      const normalized = normalizeAddress(lowercase);
+      expect(normalized).toBe(wallet.address);
     });
 
     it('should return null for invalid address', () => {
@@ -93,9 +95,9 @@ describe('signatureService', () => {
     });
 
     it('should handle already checksummed addresses', () => {
-      const address = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0';
-      const normalized = normalizeAddress(address);
-      expect(normalized).toBe(address);
+      const wallet = ethers.Wallet.createRandom();
+      const normalized = normalizeAddress(wallet.address);
+      expect(normalized).toBe(wallet.address);
     });
   });
 });

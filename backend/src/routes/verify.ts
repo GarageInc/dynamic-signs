@@ -13,10 +13,10 @@ router.post('/verify-signature', async (req: Request, res: Response) => {
     const { message, signature } = req.body as VerifyRequest;
 
     // Validate input
-    if (!message || typeof message !== 'string') {
+    if (typeof message !== 'string' || message.length === 0) {
       return res.status(400).json({
         error: 'Invalid request',
-        message: 'Message is required and must be a string'
+        message: 'Message is required and must be a non-empty string'
       });
     }
 

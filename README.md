@@ -35,6 +35,16 @@ bun run dev
 ## Tests
 
 ```bash
+# Stop docker first to free port 3001
+docker-compose down
+
+# Backend tests
+cd backend && bun run test
+
+# Frontend tests  
+cd frontend && bun run test
+
+# Or run all with docker
 docker-compose -f docker-compose.test.yml up
 ```
 
