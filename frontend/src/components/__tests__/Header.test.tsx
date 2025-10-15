@@ -2,9 +2,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Header from '../Header';
 
-// Mock the Dynamic context
-vi.mock('@dynamic-labs/sdk-react-core', () => ({
-  useDynamicContext: () => ({
+// Mock the useAuth hook
+vi.mock('../../hooks/useAuth', () => ({
+  useAuth: () => ({
     user: {
       verifiedCredentials: [
         {
@@ -12,9 +12,9 @@ vi.mock('@dynamic-labs/sdk-react-core', () => ({
         },
       ],
     },
+    isAuthenticated: true,
     handleLogOut: vi.fn(),
   }),
-  isAuthenticatedWithAWallet: () => true,
 }));
 
 describe('Header', () => {

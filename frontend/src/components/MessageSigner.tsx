@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 import { verifySignature } from '../services/api';
 import { useSignatureStore } from '../store/signatureStore';
+import { useAuth } from '../hooks/useAuth';
 
 const MessageSigner = () => {
-  const { primaryWallet } = useDynamicContext();
+  const { primaryWallet } = useAuth();
   const [message, setMessage] = useState('');
   const [isSigning, setIsSigning] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);

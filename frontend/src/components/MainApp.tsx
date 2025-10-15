@@ -1,12 +1,11 @@
-import { isAuthenticatedWithAWallet, useDynamicContext } from '@dynamic-labs/sdk-react-core';
 import WalletConnection from './WalletConnection';
 import MessageSigner from './MessageSigner';
 import SignatureHistory from './SignatureHistory';
 import Header from './Header';
+import { useAuth } from '../hooks/useAuth';
 
 const MainApp = () => {
-  const { user } = useDynamicContext();
-  const isAuthenticated = user && isAuthenticatedWithAWallet(user)
+  const { user, isAuthenticated } = useAuth();
 
   return (
     <div className="min-h-screen">
