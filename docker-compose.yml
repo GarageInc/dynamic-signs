@@ -15,7 +15,7 @@ services:
       - ./backend/package.json:/app/package.json
     networks:
       - web3-network
-    command: npm run dev
+    command: bun run dev
 
   frontend:
     build:

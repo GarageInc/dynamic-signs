@@ -1,22 +1,22 @@
-FROM node:20-alpine
+FROM oven/bun:1-alpine
 
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package.json bun.lockb* ./
 
 # Install dependencies
-RUN npm install
+RUN bun install
 
 # Copy source code
 COPY . .
 
 # Build TypeScript
-RUN npm run build
+RUN bun run build
 
 # Expose port
 EXPOSE 3001
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["bun", "start"]
 

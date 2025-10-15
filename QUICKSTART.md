@@ -43,16 +43,16 @@ docker-compose down
 ### Backend
 ```bash
 cd backend
-npm install
+bun install
 cp .env.example .env
-npm run dev
+bun run dev
 ```
 
 ### Frontend
 ```bash
 cd frontend
-npm install
+bun install
 cp .env.example .env
-npm run dev
+bun run dev
 ```
 

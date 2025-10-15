@@ -66,11 +66,11 @@ test:
 
 test-backend:
 	@echo "🧪 Running backend tests..."
-	@cd backend && npm test
+	@cd backend && bun test
 
 test-frontend:
 	@echo "🧪 Running frontend tests..."
-	@cd frontend && npm test
+	@cd frontend && bun test
 
 clean:
 	@echo "🧹 Cleaning up..."
@@ -79,17 +79,17 @@ clean:
 
 install-backend:
 	@echo "📦 Installing backend dependencies..."
-	@cd backend && npm install
+	@cd backend && bun install
 
 install-frontend:
 	@echo "📦 Installing frontend dependencies..."
-	@cd frontend && npm install
+	@cd frontend && bun install
 
 dev-backend:
 	@echo "🚀 Starting backend in dev mode..."
-	@cd backend && npm run dev
+	@cd backend && bun run dev
 
 dev-frontend:
 	@echo "🚀 Starting frontend in dev mode..."
-	@cd frontend && npm run dev
+	@cd frontend && bun run dev
 

@@ -9,7 +9,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-    command: npm test
+    command: bun test
     networks:
       - test-network
 
@@ -25,7 +25,7 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    command: npm test
+    command: bun test
     networks:
       - test-network
 
