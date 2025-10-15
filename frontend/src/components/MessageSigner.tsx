@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 import { verifySignature } from '../services/api';
 import { useSignatureStore } from '../store/signatureStore';
+import { Signer } from 'ethers';
 
 const MessageSigner = () => {
-  const { primaryWallet, user } = useDynamicContext();
+  const { primaryWallet } = useDynamicContext();
   const [message, setMessage] = useState('');
   const [isSigning, setIsSigning] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -32,7 +33,12 @@ const MessageSigner = () => {
 
     try {
       // Sign the message using Dynamic's wallet connector
-      const signer = await primaryWallet.connector.getSigner();
+      const signer: Signer = await primaryWallet.connector.getSigner() as Signer;
+
+      if(!signer) {
+        setError('No signer found');
+        return;
+      }
       const signature = await signer.signMessage(message);
 
       setIsSigning(false);
