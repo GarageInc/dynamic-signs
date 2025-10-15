@@ -1,6 +1,5 @@
 import { ethers } from 'ethers';
 import { verifySignature, isValidAddress, normalizeAddress } from './signatureService';
-import {describe, it, expect} from 'vitest'
 
 describe('signatureService', () => {
   describe('verifySignature', () => {

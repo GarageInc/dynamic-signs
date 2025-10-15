@@ -66,11 +66,11 @@ test:
 
 test-backend:
 	@echo "🧪 Running backend tests..."
-	@cd backend && bun test
+	@cd backend && bun run test
 
 test-frontend:
 	@echo "🧪 Running frontend tests..."
-	@cd frontend && bun test
+	@cd frontend && bun run test
 
 clean:
 	@echo "🧹 Cleaning up..."
