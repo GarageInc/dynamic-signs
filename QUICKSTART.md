@@ -28,8 +28,10 @@
 
 ## Run Tests
 
+**Recommended - Run locally:**
 ```bash
-docker-compose -f docker-compose.test.yml up
+cd backend && bun run test
+cd frontend && bun run test
 ```
 
 ## Stop Application

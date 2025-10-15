@@ -60,10 +60,6 @@ logs-backend:
 logs-frontend:
 	@docker-compose logs -f frontend
 
-test:
-	@echo "🧪 Running tests..."
-	@docker-compose -f docker-compose.test.yml up --abort-on-container-exit
-
 test-backend:
 	@echo "🧪 Running backend tests..."
 	@cd backend && bun run test

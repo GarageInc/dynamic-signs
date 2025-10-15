@@ -5,8 +5,8 @@ WORKDIR /app
 # Copy package files
 COPY package.json bun.lockb* ./
 
-# Install dependencies
-RUN bun install
+# Install dependencies (ignore optional native builds)
+RUN bun install --ignore-scripts
 
 # Copy source code
 COPY . .
