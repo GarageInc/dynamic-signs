@@ -30,19 +30,18 @@ const MessageSigner = () => {
     setSuccess(null);
     setIsSigning(true);
 
-    try {
-      // Sign the message using Dynamic's wallet connector
+      try {
+        // Sign the message using Dynamic's wallet connector
+        const signature = await primaryWallet.signMessage(message);
 
-      debugger;
-      const signature = await primaryWallet.signMessage(message);
+        if (!signature) {
+          setError('Failed to sign message');
+          setIsSigning(false);
+          return;
+        }
 
-      setIsSigning(false);
-      setIsVerifying(true);
-
-      if(!signature) {
-        setError('Failed to sign message');
-        return;
-      }
+        setIsSigning(false);
+        setIsVerifying(true);
 
       // Verify the signature with the backend
       const result = await verifySignature(message, signature);

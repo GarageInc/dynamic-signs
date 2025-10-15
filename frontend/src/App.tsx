@@ -26,15 +26,6 @@ const App = () => {
       settings={{
         environmentId,
         walletConnectors: [EthereumWalletConnectors],
-        // Headless configuration - no default UI widgets
-        eventsCallbacks: {
-          onAuthSuccess: (args) => {
-            console.log('Authentication successful', args);
-          },
-          onLogout: () => {
-            console.log('User logged out');
-          },
-        },
       }}
     >
       <MainApp />

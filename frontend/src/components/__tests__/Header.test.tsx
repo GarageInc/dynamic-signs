@@ -12,25 +12,25 @@ vi.mock('@dynamic-labs/sdk-react-core', () => ({
         },
       ],
     },
-    isAuthenticated: true,
     handleLogOut: vi.fn(),
   }),
+  isAuthenticatedWithAWallet: () => true,
 }));
 
 describe('Header', () => {
   it('renders the app title', () => {
     render(<Header />);
-    expect(screen.getByText('Web3 Message Signer')).toBeInTheDocument();
+    expect(screen.getByText('SynX Labs')).toBeDefined();
   });
 
   it('displays user address when authenticated', () => {
     render(<Header />);
-    expect(screen.getByText(/0x742d/)).toBeInTheDocument();
+    expect(screen.getByText(/0x742d/)).toBeDefined();
   });
 
   it('shows disconnect button when authenticated', () => {
     render(<Header />);
-    expect(screen.getByText('Disconnect')).toBeInTheDocument();
+    expect(screen.getByText('Disconnect')).toBeDefined();
   });
 });
 
